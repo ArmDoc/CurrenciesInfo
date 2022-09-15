@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\ICurrencyGetter;
-use CBA;
+use App\Service\Currency\CBA;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
 		 *Info Comment :) 
 		 */
 		$this->app->bind(ICurrencyGetter::class, function () {
-			return new CBA;
+			return new CBA(config('currency.cba'));
 		});
 	}
 

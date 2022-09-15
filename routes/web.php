@@ -1,5 +1,7 @@
 <?php
 
+use App\Facades\CurrencyGetter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
+});
+
+Route::get('/getCurrency/{ISO}', function ($ISO) {
+	dd(CurrencyGetter::getCurrency($ISO));
+});
+
+Route::get('/getCurrencies', function () {
+	dd(CurrencyGetter::getCurrencies());
 });
