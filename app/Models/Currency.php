@@ -13,8 +13,8 @@ class Currency extends Model
 		'name',
 	];
 
-	public function CurrenciesHistory()
+	public function history()
 	{
-		return $this->hasMany(CurrenciesHistory::class);
+		return $this->hasMany(CurrencyHistory::class);
 	}
 }

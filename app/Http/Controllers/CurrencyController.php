@@ -14,7 +14,9 @@ class CurrencyController extends Controller
 	 */
 	public function index()
 	{
-		//
+		return [
+			'currencies' => Currency::all()
+		];
 	}
 
 	/**
@@ -25,7 +27,12 @@ class CurrencyController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$request->validate([
+			'name' => 'required'
+		]);
+
+		$currency = Currency::create(['name' => $request->name]);
+		return ['currency' => $currency];
 	}
 
 	/**
@@ -36,7 +43,7 @@ class CurrencyController extends Controller
 	 */
 	public function show(Currency $currency)
 	{
-		//
+		return ['currency' => $currency];
 	}
 
 	/**
@@ -48,7 +55,12 @@ class CurrencyController extends Controller
 	 */
 	public function update(Request $request, Currency $currency)
 	{
-		//
+		$request->validate([
+			'name' => 'required'
+		]);
+
+		$currency->update(['name' => $request->name]);
+		return ['currency' => $currency];
 	}
 
 	/**
@@ -59,6 +71,7 @@ class CurrencyController extends Controller
 	 */
 	public function destroy(Currency $currency)
 	{
-		//
+		$currency->delete();
+		return ['status' => true];
 	}
 }

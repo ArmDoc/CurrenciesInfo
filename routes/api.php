@@ -1,6 +1,7 @@
 <?php
 
 use App\Facades\CurrencyGetter;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Resources\CurrenciesResourc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 	return $request->user();
 });
 
-// Route::get('/currencies', function () {
-// 	return CurrenciesResourc::collection(CurrencyGetter::all());
-// });
+Route::apiResource('currency', CurrencyController::class);
