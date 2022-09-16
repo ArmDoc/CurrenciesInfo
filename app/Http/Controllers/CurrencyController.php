@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Currency;
+use App\Models\CurrencyHistory;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
@@ -44,6 +45,33 @@ class CurrencyController extends Controller
 	public function show(Currency $currency)
 	{
 		return ['currency' => $currency];
+	}
+
+	/**
+	 * @param Request $request 
+	 * @param Currency $currency 
+	 * @return void 
+	 */
+	public function select(Request $request, Currency $currency)
+	{
+		$start 	= $request->date_start;
+		$end		= $request->date_end ?? now();
+
+		$history = $currency->history();
+
+		if ($start) {
+
+			$history->where('created_at', '>=', $start);
+		}
+
+		if ($end) {
+
+			$history->where('created_at', '<=', $end);
+		}
+
+		return [
+			'history'	=> $history->get()
+		];
 	}
 
 	/**

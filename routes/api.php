@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('currency', CurrencyController::class);
+
+Route::post('currency/select/{currency}', [CurrencyController::class, 'select']);
